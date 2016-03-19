@@ -10,12 +10,11 @@
 	    android:layout_height="0dp"
 	    android:layout_weight="1">
 	    
-	    <fragment 
-	    android:id="@+id/person"
-	    android:name="com.date.app.fragment.Person"
+	    <fragment
+	    android:id="@+id/agenda_fragment"
+	    android:name="com.date.app.fragment.Agenda"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
-
 	    />
 	    
 	</FrameLayout>
@@ -23,7 +22,7 @@
 	
 	<fragment 
 	    android:id="@+id/first_fragment"
-	    android:name="com.date.app.fragment.FirstFragment"
+	    android:name="com.date.app.fragment.Down"
 	    android:layout_width="match_parent"
 	    android:layout_height="50dp"/>
     
