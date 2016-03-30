@@ -4,9 +4,60 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-	<TextView 
+	
+	<RelativeLayout 
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:text="新日程"/>
+	    android:layout_height="50dp"
+	    android:background="#484E61">
+	    
+	    <TextView 
+	    	android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	    	android:text="新日程"
+	    	android:textColor="#fff"
+	    	android:textSize="20sp"
+	    	android:layout_centerInParent="true"/>
+	    
+	    <Button 
+	        android:id="@+id/save_agenda"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="保存"
+	        android:textColor="#fff"
+	        android:textSize="15sp"
+	        android:layout_alignParentRight="true"/>
+	    
+	</RelativeLayout>
+	
+	<TableLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:stretchColumns="1">
+	    
+	    <TableRow >
+	        
+	        <TextView 
+	        android:layout_height="wrap_content"
+	        android:text="事件名称:"
+	        android:textSize="20sp"
+	        />
+	    
+	   		<EditText 
+	        android:id="@+id/event_name"
+	        android:layout_height="wrap_content"/> 
+	        
+	    </TableRow>
+	    
+	    <DatePicker 
+	        android:id="@+id/date_pick"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:calendarViewShown="false"/>
+	    
+	  
+	</TableLayout>
+    
+	
+	
     
 </LinearLayout>
