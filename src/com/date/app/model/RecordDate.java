@@ -42,4 +42,10 @@ public class RecordDate {
 		this.day = day;
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return year + "Äê" + (month + 1) + "ÔÂ" + day + "ÈÕ";
+	}
+	
 }

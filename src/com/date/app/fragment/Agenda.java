@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.date.app.R;
+import com.date.app.activity.Details;
 import com.date.app.activity.NewAgenga;
 import com.date.app.model.DateDB;
 import com.date.app.model.RecordDate;
@@ -15,11 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class Agenda extends Fragment {
+public class Agenda extends Fragment implements OnItemClickListener {
 	
 	private Button addAgenda;
 	
@@ -27,11 +30,11 @@ public class Agenda extends Fragment {
 	
 	private List<RecordDate> dateList;
 	
-	private ArrayAdapter<String> adapter;
+	private ArrayAdapter<RecordDate> adapter;
 	
 	private DateDB dateDB;
 	
-	private List<String> datalist = new ArrayList<String>();
+	private List<RecordDate> datalist = new ArrayList<RecordDate>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,14 +59,28 @@ public class Agenda extends Fragment {
 		if (dateList.size() > 0) {
 			datalist.clear();
 			for (RecordDate r : dateList) {
-				datalist.add(r.getYear() + "Äê" + (r.getMonth()+1) + "ÔÂ" + r.getDay() + "ÈÕ");
+				datalist.add(r);
 			}
 		}
 		
-		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
+		adapter = new ArrayAdapter<RecordDate>(getActivity(), android.R.layout.simple_list_item_1,
 				datalist);
 		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(this);
 		return view;
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+		RecordDate recordDate = datalist.get(position);
+		Intent intent = new Intent(getActivity(), Details.class);
+		intent.putExtra("eventName", recordDate.getEventName());
+		intent.putExtra("year", recordDate.getYear());
+		intent.putExtra("month", (recordDate.getMonth()+1));
+		intent.putExtra("day", recordDate.getDay());
+		startActivity(intent);
+		//getActivity().finish();
 	}
 	
 	

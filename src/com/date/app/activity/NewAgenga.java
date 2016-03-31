@@ -19,6 +19,8 @@ public class NewAgenga extends Activity implements OnClickListener {
 
 	private Button saveAgenda;
 	
+	private Button newAgendaBack;
+	
 	private EditText eventName;
 	
 	private DatePicker datePicker;
@@ -33,6 +35,8 @@ public class NewAgenga extends Activity implements OnClickListener {
 		setContentView(R.layout.new_agenda_activity);
 		saveAgenda = (Button) findViewById(R.id.save_agenda);
 		saveAgenda.setOnClickListener(this);
+		newAgendaBack = (Button) findViewById(R.id.new_agenda_back);
+		newAgendaBack.setOnClickListener(this);
 		eventName = (EditText) findViewById(R.id.event_name);
 		datePicker = (DatePicker) findViewById(R.id.date_pick);
 		
@@ -43,21 +47,39 @@ public class NewAgenga extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.save_agenda:
 			dateDB = DateDB.getInstance(this);
-			RecordDate recordDate = new RecordDate();
-			recordDate.setEventName(eventName.getText().toString());
-			recordDate.setDay(datePicker.getDayOfMonth());
-			recordDate.setMonth(datePicker.getMonth());
-			recordDate.setYear(datePicker.getYear());
-			dateDB.saveDate(recordDate);
-			Toast.makeText(this, "新建成功", Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(this, ActivityOverview.class);
-			startActivity(intent);
-			finish();
+			if (eventName.getText().toString().isEmpty()) {
+				Toast.makeText(this, "空日程", Toast.LENGTH_SHORT).show();
+			}else {
+				RecordDate recordDate = new RecordDate();
+				recordDate.setEventName(eventName.getText().toString());
+				recordDate.setDay(datePicker.getDayOfMonth());
+				recordDate.setMonth(datePicker.getMonth());
+				recordDate.setYear(datePicker.getYear());
+				dateDB.saveDate(recordDate);
+				Toast.makeText(this, "新建成功", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(this, ActivityOverview.class);
+				startActivity(intent);
+				finish();
+			}
+			
+			
 			break;
-
+		case R.id.new_agenda_back:
+			Intent intent2 = new Intent(this, ActivityOverview.class);
+			startActivity(intent2);
+			finish();
 		default:
 			break;
 		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		Intent intent = new Intent(this, ActivityOverview.class);
+		startActivity(intent);
+		finish();
 	}
 	
 }
